@@ -17,18 +17,20 @@ idno = ['1002600056626','1003602004112','1002600056626']
 # def idn():
 #     for x in idno:
     
-
+#huineaua asta nu merge cu loop
 soup = BeautifulSoup("html.parser", "lxml")
 def acces():
-    for x in idno:
-        url = ("https://www.infobase.md/ro/search?page=1&q=" + x)
+    url = "https://www.infobase.md/ro/search?page=1&q="
+    for x in range(len(idno)):
+        pint = url + idno[x]
+        
     else:
         print('finish')
-        print(idno)
-    return url
+        print(x)
+    return pint
 
 driver = webdriver.Firefox(executable_path="../geckodriver")
-driver.get(acces())
+# driver.get(acces())
 
 
 driver.implicitly_wait(5)
@@ -45,9 +47,12 @@ def parsing():
 
 if __name__ == "__main__":
     try:
+        for x in idno:
+            # acces()
+            driver.get(acces())
         enter_dno()
-    except Exception as e:
-        print(e)
+    # except Exception as e:
+    #     print(e)
     finally:
         driver.implicitly_wait(20)
         # driver.quit()
