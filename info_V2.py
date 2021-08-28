@@ -11,12 +11,8 @@ from bs4 import BeautifulSoup
 import requests
 
 
-idno = ["1002600056626", "1003602004112", "1009600017846","1013606000397"]
+idno = ["1002600056626", "1003602004112", "1009600017846", "1013606000397"]
 
-# def idn():
-#     for x in idno:
-
-# huineaua asta nu merge cu loop
 soup = BeautifulSoup("html.parser", "lxml")
 url = "https://www.infobase.md/ro/search?page=1&q="
 
@@ -30,8 +26,6 @@ def acces():
 
 
 driver = webdriver.Firefox(executable_path="../geckodriver")
-# driver.get(acces())
-
 
 driver.implicitly_wait(5)
 
@@ -44,7 +38,9 @@ def enter_dno():
 
 
 def parsing():
-    pass
+    for y in parsing():
+        request = requests.get(url)
+        print(request.status_code)
 
 
 if __name__ == "__main__":
@@ -53,6 +49,7 @@ if __name__ == "__main__":
             # acces()
             driver.get(url + x)
             enter_dno()
+            parsing()
 
     # except Exception as e:
     #     print(e)
