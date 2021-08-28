@@ -11,14 +11,14 @@ from bs4 import BeautifulSoup
 import requests
 
 
-idno = ["1002600056626", "1003602004112", "1002600056626"]
+idno = ["1002600056626", "1003602004112", "1009600017846","1013606000397"]
 
 # def idn():
 #     for x in idno:
 
 # huineaua asta nu merge cu loop
 soup = BeautifulSoup("html.parser", "lxml")
-url = "https://www.infobase.md/ro/search?page=1&q=/"
+url = "https://www.infobase.md/ro/search?page=1&q="
 
 
 def acces():
@@ -52,8 +52,8 @@ if __name__ == "__main__":
         for x in idno:
             # acces()
             driver.get(url + x)
+            enter_dno()
 
-        enter_dno()
     # except Exception as e:
     #     print(e)
     finally:
