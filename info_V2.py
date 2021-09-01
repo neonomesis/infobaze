@@ -13,64 +13,98 @@ import requests
 
 idno = ["1002600056626", "1003602004112", "1009600017846", "1013606000397"]
 
-soup = BeautifulSoup("html.parser", "lxml")
+# html_code = driver.page_source
+# soup = BeautifulSoup(html_code, "lxml")
 url = "https://www.infobase.md/ro/search?page=1&q="
 driver = webdriver.Firefox(executable_path="../geckodriver")
 
 
-def acces():
-    for x in idno:
-        pint = url + x
-        print(pint)
-    return pint
+# def acces():
+#     for x in idno:
+#         pint = url + x
+#         print(pint)
+
+#     return pint
+
 
 def enter_dno():
     driver.implicitly_wait(10)
     search_engine = driver.find_element(
         By.XPATH, '//*[@id="index"]/div/main/div/div[3]/div[1]/div/div/div/h2/a'
     ).click()
+    driver.implicitly_wait(10)
+    parsing()
 
 
-#working to acces
+# working to acces
+# def acces():
+    
+#     try:
+#         for x in idno:
+#             y = driver.get(url + x)
+#             p = url + x
+#             enter_dno()
+#             print(p)
+
+#     finally:
+#         pass
+#     return y
+
+
+
 def acces():
+    
     try:
         for x in idno:
-            # acces()
-            driver.get(url + x)
+            y = driver.get(url + x)
+            p = url + x
             enter_dno()
+            # s = enter_dno()
+            print(p)
+
     finally:
         pass
-
-def load_initial_website(url):
-    driver.get(url)
-#--------------------------------------------------------
+        # print('Entered the page')
+    return y
 
 
+
+# --------------------------------------------------------
 
 def parsing():
+    global soup
+    html_code = driver.page_source
+    soup = BeautifulSoup(html_code, 'html.parser')
+
+    # for x in soup :
+    x = soup.find_all('h')
+    print(x)
     
-    soup = BeautifulSoup('html_code', 'html.parser')
-    containers = soup.find_all(class_='MuiTableCell-root MuiTableCell-body')
 
+        
     
 
 
 
 
 
+def reunion():
+    try:
+        acces()
+        # for x in acces():
+        #     parsing(x)
+        parsing()
 
+    finally:
+        pass
+        print("end of test------------------------------------------------------------------------")
 
 if __name__ == "__main__":
     try:
-        acces()
-        # for x in idno:
-        #     # acces()
-        #     driver.get(url + x)
-        #     enter_dno()
-        parsing()
+        reunion()
 
     except Exception as e:
         print(e)
     finally:
-        driver.implicitly_wait(20)
-        # driver.quit()
+        # driver.implicitly_wait(20)
+        driver.quit()
