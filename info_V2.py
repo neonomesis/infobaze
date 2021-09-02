@@ -13,54 +13,30 @@ import requests
 
 idno = ["1002600056626", "1003602004112", "1009600017846", "1013606000397"]
 
-# html_code = driver.page_source
-# soup = BeautifulSoup(html_code, "lxml")
 url = "https://www.infobase.md/ro/search?page=1&q="
 driver = webdriver.Firefox(executable_path="../geckodriver")
 
 
-# def acces():
-#     for x in idno:
-#         pint = url + x
-#         print(pint)
-
-#     return pint
-
-
 def enter_dno():
+
     driver.implicitly_wait(10)
     search_engine = driver.find_element(
         By.XPATH, '//*[@id="index"]/div/main/div/div[3]/div[1]/div/div/div/h2/a'
     ).click()
-    driver.implicitly_wait(10)
-    parsing()
-
-
-# working to acces
-# def acces():
-    
-#     try:
-#         for x in idno:
-#             y = driver.get(url + x)
-#             p = url + x
-#             enter_dno()
-#             print(p)
-
-#     finally:
-#         pass
-#     return y
-
+    return search_engine
 
 
 def acces():
-    
+
     try:
         for x in idno:
             y = driver.get(url + x)
             p = url + x
-            enter_dno()
-            # s = enter_dno()
             print(p)
+            enter_dno()
+            # driver.implicitly_wait(10)
+
+            parsing()
 
     finally:
         pass
@@ -68,38 +44,38 @@ def acces():
     return y
 
 
-
 # --------------------------------------------------------
 
+
 def parsing():
-    global soup
+
+    # global soup
     html_code = driver.page_source
-    soup = BeautifulSoup(html_code, 'html.parser')
+    markup = driver.page_source
+    soup = BeautifulSoup(html_code, "lxml")
 
     # for x in soup :
-    x = soup.find_all('h')
+    x = soup.select("title")
+    y = soup.find_all(class_="MuiGrid-root MuiGrid-item MuiGrid-grid-md-12")
+
     print(x)
-    
-
-        
-    
-
-
-
+    print(y)
 
 
 def reunion():
+
     try:
         acces()
-        # for x in acces():
-        #     parsing(x)
-        parsing()
 
     finally:
         pass
-        print("end of test------------------------------------------------------------------------")
+        print(
+            "end of test--------------------------------------------------------------------------------"
+        )
+
 
 if __name__ == "__main__":
+
     try:
         reunion()
 
