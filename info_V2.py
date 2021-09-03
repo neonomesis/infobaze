@@ -24,19 +24,14 @@ def acces():
             y = driver.get(url + x)
             p = url + x
             print(p)
-            # driver.implicitly_wait(10)
             enter_dno()
-            # driver.implicitly_wait(10)
-            time.sleep(2)
+            time.sleep(1)
             parsing()
             
 
     finally:
         pass
-        # print('Entered the page')
 
-
-    
 
 def enter_dno():
 
@@ -44,10 +39,6 @@ def enter_dno():
     search_engine = driver.find_element(
         By.XPATH, '//*[@id="index"]/div/main/div/div[3]/div[1]/div/div/div/h2/a'
     ).click()
-
-
-
-
 
 
 # --------------------------------------------------------
@@ -62,15 +53,26 @@ def parsing():
         
         # for x in soup :
         x = soup.select("title")
-        # y = soup.find(class_="MuiTypography-root MuiTypography-h2")
         c = soup.find(class_="MuiTypography-root MuiTypography-h2")
+
+        
         print(x)
-        # print(y)
         print(c)
 
     finally:
         pass
 
+
+
+
+
+# not working
+def importing():
+    f = open ('demon.txt', "w")
+    y = f.write(parsing())
+    # s = json.dumps()
+    f.write(y)
+    f.close()
     
     
 
@@ -79,10 +81,8 @@ def reunion():
 
     try:
         acces()
+        
         # parsing()
-
-
-
 
     finally:
         pass
@@ -95,6 +95,7 @@ if __name__ == "__main__":
 
     try:
         reunion()
+        # importing()
 
     except Exception as e:
         print(e)
