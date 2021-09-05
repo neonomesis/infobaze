@@ -1,14 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.common.exceptions import ElementNotInteractableException
 from bs4 import BeautifulSoup
-import requests
+from bs4.formatter import HTMLFormatter
 import time
 
 
@@ -16,6 +10,7 @@ idno = ["1002600056626", "1003602004112", "1009600017846", "1013606000397"]
 
 url = "https://www.infobase.md/ro/search?page=1&q="
 driver = webdriver.Firefox(executable_path="../geckodriver")
+
 
 def acces():
 
@@ -25,9 +20,14 @@ def acces():
             p = url + x
             print(p)
             enter_dno()
-            time.sleep(1)
+            time.sleep(2)
+
             parsing()
-            
+            # time.sleep(2)
+
+            print(
+            "end of idno--------------------------------------------------------------------------------"
+        )
 
     finally:
         pass
@@ -49,18 +49,33 @@ def parsing():
     html_code = driver.page_source
     markup = driver.page_source
     soup = BeautifulSoup(html_code, "lxml")
+    
     try:
-        
-        # for x in soup :
+
         x = soup.select("title")
         c = soup.find(class_="MuiTypography-root MuiTypography-h2")
+        p = soup.select_one(".MuiTableBody-root").get_text() #.descendants
+        n = soup.find(class_='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4').get_text()
 
-        
+        # for child in p:
+        #     print(child)
+
         print(x)
         print(c)
+        print(p)
+        print (n)
+        
 
     finally:
         pass
+
+def pretyer():
+    # parsing()
+    dates = {
+        'IDNO': 'n'
+    }
+
+
 
 
 
@@ -68,20 +83,18 @@ def parsing():
 
 # not working
 def importing():
-    f = open ('demon.txt', "w")
+    f = open("demon.json", "w")
     y = f.write(parsing())
     # s = json.dumps()
     f.write(y)
     f.close()
-    
-    
 
 
 def reunion():
 
     try:
         acces()
-        
+
         # parsing()
 
     finally:
