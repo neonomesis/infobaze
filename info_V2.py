@@ -9,6 +9,8 @@ idno = ["1002600056626", "1003602004112", "1009600017846", "1013606000397"]
 url = "https://www.infobase.md/ro/search?page=1&q="
 driver = webdriver.Firefox(executable_path="../geckodriver")
 
+# enter the program, accesing web, looping it, writing it
+
 
 def acces():
 
@@ -21,13 +23,11 @@ def acces():
             time.sleep(1)
             parsing()
             importing()
-
-            print(
-                "end of idno--------------------------------------------------------------------------------"
-            )
-
     finally:
         pass
+
+
+# entering link of idno
 
 
 def enter_dno():
@@ -38,7 +38,7 @@ def enter_dno():
     ).click()
 
 
-# --------------------------------------------------------
+# parsing web
 
 
 def parsing():
@@ -61,10 +61,15 @@ def parsing():
         pass
 
 
-# for clasification
+# for clasification not working, not using
+
+
 def pretyer():
     # parsing()
     dates = {"IDNO": "n"}
+
+
+# creating file, writin it
 
 
 def importing():
@@ -84,22 +89,12 @@ def importing():
         f.close()
 
 
-def reunion():
-
-    try:
-        acces()
-
-    finally:
-        pass
-        print(
-            "end of test--------------------------------------------------------------------------------"
-        )
-
+# program start
 
 if __name__ == "__main__":
 
     try:
-        reunion()
+        acces()
 
     except Exception as e:
         print(e)
