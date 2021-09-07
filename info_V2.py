@@ -1,8 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
-from bs4.formatter import HTMLFormatter
 import time
 
 
@@ -21,9 +19,7 @@ def acces():
             print(p)
             enter_dno()
             time.sleep(1)
-
             parsing()
-            # time.sleep(2)
             importing()
 
             print(
@@ -50,20 +46,22 @@ def parsing():
     global p, c, n, x
 
     html_code = driver.page_source
-    # markup = driver.page_source
     soup = BeautifulSoup(html_code, "lxml")
 
     try:
 
         x = soup.select("title")
-        c = soup.find(class_="MuiTypography-root MuiTypography-h2").get_text('\n')
-        p = soup.select_one(".MuiTableBody-root").get_text('\n')  # .descendants
-        n = soup.find(class_="MuiGrid-root MuiGrid-item MuiGrid-grid-md-4").get_text('\n')
+        c = soup.find(class_="MuiTypography-root MuiTypography-h2").get_text("\n")
+        p = soup.select_one(".MuiTableBody-root").get_text("\n")  # .descendants
+        n = soup.find(class_="MuiGrid-root MuiGrid-item MuiGrid-grid-md-4").get_text(
+            "\n"
+        )
 
     finally:
         pass
 
 
+# for clasification
 def pretyer():
     # parsing()
     dates = {"IDNO": "n"}
@@ -71,18 +69,18 @@ def pretyer():
 
 def importing():
     with open("test.txt", "a") as f:
-        
+
         for o in c:
             f.write(o)
-        f.write('\n')
+        f.write("\n")
         for o in p:
             f.write(o)
         for o in n:
             f.write(o)
-        
-        f.write('\n')
-        f.write('-----------------')  
-        f.write('\n')     
+
+        f.write("\n")
+        f.write("-----------------")
+        f.write("\n")
         f.close()
 
 
@@ -90,8 +88,6 @@ def reunion():
 
     try:
         acces()
-        # importing()
-        # parsing()
 
     finally:
         pass
@@ -104,10 +100,8 @@ if __name__ == "__main__":
 
     try:
         reunion()
-        # importing()
 
     except Exception as e:
         print(e)
     finally:
-        # driver.implicitly_wait(20)
         driver.quit()
