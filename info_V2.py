@@ -20,14 +20,15 @@ def acces():
             p = url + x
             print(p)
             enter_dno()
-            time.sleep(2)
+            time.sleep(1)
 
             parsing()
             # time.sleep(2)
+            importing()
 
             print(
-            "end of idno--------------------------------------------------------------------------------"
-        )
+                "end of idno--------------------------------------------------------------------------------"
+            )
 
     finally:
         pass
@@ -45,56 +46,51 @@ def enter_dno():
 
 
 def parsing():
+    global soup
+    global p, c, n, x
 
     html_code = driver.page_source
-    markup = driver.page_source
+    # markup = driver.page_source
     soup = BeautifulSoup(html_code, "lxml")
-    
+
     try:
 
         x = soup.select("title")
-        c = soup.find(class_="MuiTypography-root MuiTypography-h2")
-        p = soup.select_one(".MuiTableBody-root").get_text() #.descendants
-        n = soup.find(class_='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4').get_text()
-
-        # for child in p:
-        #     print(child)
-
-        print(x)
-        print(c)
-        print(p)
-        print (n)
-        
+        c = soup.find(class_="MuiTypography-root MuiTypography-h2").get_text('\n')
+        p = soup.select_one(".MuiTableBody-root").get_text('\n')  # .descendants
+        n = soup.find(class_="MuiGrid-root MuiGrid-item MuiGrid-grid-md-4").get_text('\n')
 
     finally:
         pass
 
+
 def pretyer():
     # parsing()
-    dates = {
-        'IDNO': 'n'
-    }
+    dates = {"IDNO": "n"}
 
 
-
-
-
-
-
-# not working
 def importing():
-    f = open("demon.json", "w")
-    y = f.write(parsing())
-    # s = json.dumps()
-    f.write(y)
-    f.close()
+    with open("test.txt", "a") as f:
+        
+        for o in c:
+            f.write(o)
+        f.write('\n')
+        for o in p:
+            f.write(o)
+        for o in n:
+            f.write(o)
+        
+        f.write('\n')
+        f.write('-----------------')  
+        f.write('\n')     
+        f.close()
 
 
 def reunion():
 
     try:
         acces()
-
+        # importing()
         # parsing()
 
     finally:
