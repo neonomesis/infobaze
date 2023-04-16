@@ -11,7 +11,6 @@ driver = webdriver.Firefox(executable_path="../geckodriver")
 
 
 def parse_idnos(idno_list):
-    global p
     try:
         results = []
         for idno in idno_list:
@@ -115,7 +114,7 @@ def parse_individual_page():
 def save_to_file(py_dict):
     try:
         with open("test.json", "w") as f:
-            f.write(json.dumps(py_dict))
+            f.write(json.dumps(py_dict, ensure_ascii=False))
             f.close()
     except Exception as e:
         print(e)
@@ -129,6 +128,7 @@ if __name__ == "__main__":
         input_str = input("Enter IDNO: ")
         input_list = input_str.split(",")
         parse_idnos(input_list)
+        print(2)
 
     except Exception as e:
         print(e)
